@@ -175,7 +175,7 @@ module Fastlane
                                        env_name: "CRASHLYTICS_API_TOKEN",
                                        sensitive: true,
                                        optional: true,
-                                       description: "Crashlytics API Key",
+                                       description: "Crashlytics API Key. Use this if you're still using deprecated Fabric SDK.",
                                        verify_block: proc do |value|
                                          UI.user_error!("No API token for Crashlytics given, pass using `api_token: 'token'`") if value.to_s.length == 0
                                        end),
@@ -183,7 +183,7 @@ module Fastlane
                                        env_name: "GOOGLE_SERVICES_INFO_PLIST_PATH",
                                        code_gen_sensitive: true,
                                        optional: true,
-                                       description: "Path to GoogleService-Info.plist",
+                                       description: "Path to GoogleService-Info.plist. Used in preference to Crashlytics API token. Use this if you use Firebase Crashlytics SDK.",
                                        verify_block: proc do |value|
                                          UI.user_error!("Couldn't find file at path '#{File.expand_path(value)}'") unless File.exist?(value)
                                          UI.user_error!("No Path to GoogleService-Info.plist for Firebase Crashlytics given, pass using `gsp_path: 'path'`") if value.to_s.length == 0
@@ -192,7 +192,7 @@ module Fastlane
                                        env_name: "CRASHLYTICS_APP_ID",
                                        sensitive: true,
                                        optional: true,
-                                       description: "Firebase Crashlytics APP ID",
+                                       description: "Firebase Crashlytics APP ID. Used in preference to Google Services Info.plist path or Crashlytics API token. Use this if you use Firebase Crashlytics SDK.",
                                        verify_block: proc do |value|
                                          UI.user_error!("No App ID for Firebase Crashlytics given, pass using `app_id: 'appId'`") if value.to_s.length == 0
                                        end),
